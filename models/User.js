@@ -38,7 +38,7 @@ UserSchema.pre("save", function (callback) {
   }
 
   // Password changed so we need to hash it
-  bcrypt.genSalt(5, (err, salt) => {
+  bcrypt.genSalt(10, (err, salt) => {
     if (err) {
       return callback(err);
     }
