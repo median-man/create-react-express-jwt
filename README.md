@@ -11,7 +11,7 @@ An article on how the server is setup with JWT can be found [here](https://hptec
 The front end has been setup to use JWT as a way of authenticating users and routes. To understand it's structure better please refer to the following article [here](https://hptechblogs.com/using-json-web-token-react/)
 
 Please feel free to modify this code in anyway you see fit for your project. It is a boilerplate setup that tries to make sure you can get something up and running without having to worry about setting up user authentication from scratch.
-I highly suggest you read the articles before jumping in so you can have an better understanding of how everything works in the code. 
+I highly suggest you read the articles before jumping in so you can have an better understanding of how everything works in the code.
 
 Server-side article and using JWT: https://hptechblogs.com/using-json-web-token-for-authentication/
 
@@ -65,3 +65,24 @@ git commit -m "Initial commit"
 2. Go to resources and find mLab as a Add-on
 3. Provision a Mongo Database
 4. Go back and click "Deploy"
+
+## Tests/Linting
+
+Run `npm run lint` from the project root to run eslint checks on the backend
+and front end code. Run `npm run lint` from the `client` directory to lint the
+client only.
+
+The root and client have convenience scripts define to easily apply auto-fixes
+with eslint. Run `npm run lint:fix` from the root and `client` to apply fixes
+for the entire project or client only respectively.
+
+## Travis CI
+
+A basic configuration for Travis CI is included. Configure the GitHub repo to
+run checks before merging to enforce linting checks and tests.
+
+**IMPORTANT!** Add the mongodb service to `.travis.yml` if tests using MongoDB
+are included in the project. Likewise, if another database is used to replace
+MongoDB, then `.travis.yml` will need to be updated accordingly. Please refer
+to the [Travis CI Documentation](https://docs.travis-ci.com/) for more
+information.
