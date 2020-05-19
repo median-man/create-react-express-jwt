@@ -1,26 +1,14 @@
 import React from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 // Our Components
-import { AuthProvider, useAuth } from "./utils/auth";
+import { AuthProvider } from "./utils/auth";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
-
-function ProtectedRoute({ children, ...rest }) {
-  const { isLoggedIn } = useAuth();
-  if (isLoggedIn) {
-    return children;
-  }
-  return <Redirect to="/signup" />;
-}
 
 function App() {
   return (
