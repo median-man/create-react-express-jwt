@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import API from "./../utils/API";
-import {useAuth} from "../utils/auth";
+import { useAuth } from "../utils/auth";
+import { Form, InputGroup } from "../components/LoginForm";
 
+const signupStyles = {
+  maxWidth: "20rem",
+  margin: "0 auto",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+};
 
 function Signup() {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   const { isLoggedIn } = useAuth();
@@ -19,69 +27,64 @@ function Signup() {
     return <Redirect to="/" />;
   }
 
-  const handleFormSubmit = event => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     API.signUpUser(formState.username, formState.email, formState.password)
-      .then(res => {
+      .then((res) => {
         // once the user has signed up
         // send them to the login page
         history.replace("/login");
       })
-      .catch(err => alert(err));
+      .catch((err) => alert(err));
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
-      [name]: value
+      [name]: value,
     });
   };
 
   return (
-    <div className="container">
+    <div style={signupStyles} className="Signup">
       <h1>Signup</h1>
-      <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            className="form-control"
-            placeholder="Username goes here..."
-            name="username"
-            type="text"
-            id="username"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email address:</label>
-          <input
-            className="form-control"
-            placeholder="Email goes here..."
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            className="form-control"
-            placeholder="Password goes here..."
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-      <p>
-        <Link to="/login">Go to Login</Link>
-      </p>
+      <Form onSubmit={handleFormSubmit}>
+        <InputGroup
+          id="username"
+          labelText="Username"
+          placeholder="WinterIsComing"
+          name="username"
+          type="text"
+          onChange={handleChange}
+        />
+        <InputGroup
+          id="email"
+          labelText="Email"
+          placeholder="jon.snow@email.com"
+          name="email"
+          type="email"
+          onChange={handleChange}
+        />
+        <InputGroup
+          id="pwd"
+          labelText="Password"
+          placeholder="p@ssw0Rd!"
+          name="password"
+          type="password"
+          onChange={handleChange}
+        />
+        <button type="submit">Submit</button>
+      </Form>
+      <Link
+        style={{
+          marginTop: "1.5rem",
+          textAlign: "center",
+        }}
+        to="/login"
+      >
+        Go to Login
+      </Link>
     </div>
   );
 }

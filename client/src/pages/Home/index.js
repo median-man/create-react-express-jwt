@@ -11,24 +11,14 @@ function Home() {
   const goToEditProfile = () => history.push("/profile");
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="Home">
+      <div className="Home-header">
+        <img src={logo} className="Home-logo" alt="logo" />
         <h2>Welcome {user.email}</h2>
       </div>
-      <p className="App-intro">
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={goToEditProfile}
-        >
-          Go to Profile
-        </button>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => logout()}
-        >
+      <p className="Home-intro">
+        <button onClick={goToEditProfile}>Go to Profile</button>
+        <button style={{ marginLeft: "1em" }} onClick={() => logout()}>
           Logout
         </button>
       </p>
