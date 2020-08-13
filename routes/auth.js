@@ -7,8 +7,13 @@ const router = express.Router();
 router.post("/api/login", (req, res) => {
   auth
     .logUserIn(req.body.email, req.body.password)
-    .then((dbUser) => res.json(dbUser))
-    .catch((err) => res.status(400).json(err));
+    .then((result) => {
+      if (result.success) {
+        return res.json(result);
+      }
+      res.status(400).json(result);
+    })
+    .catch(() => res.sendStatus(500));
 });
 
 router.post("/api/signup", (req, res) => {

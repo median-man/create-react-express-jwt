@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("../models");
-const isAuthenticated = require("../config/isAuthenticated");
+const { isAuthenticated } = require("../config/auth");
 
 const router = express.Router();
 
